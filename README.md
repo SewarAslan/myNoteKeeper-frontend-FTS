@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+```markdown
+# Note Keeper Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React frontend application for **Note Keeper** — a simple, responsive note-taking app.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Create, read, update and delete notes (CRUD)
+- Search notes
+- Responsive design
+- Clean and intuitive UI
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React
+- CSS Modules
+- Native Fetch API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Backend
 
-### `npm test`
+Make sure the backend for this project is running before starting the frontend.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Note Keeper Backend](https://github.com/SewarAslan/nodeJS-Exercise-FTS)
 
-### `npm run build`
+By default, this README assumes the backend API is available at `http://localhost:3000`.  
+If your backend runs on the same port as the frontend (3000), either change the backend port or run the frontend on a different one (instructions below).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project Structure
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+src/
+├── components/
+│ ├── SearchBar/
+│ ├── NoteForm/
+│ ├── NoteCard/
+│ ├── NoteDialog/
+│ ├── DeleteConfirmDialog/
+│ └── NotesList/
+├── hooks/
+├── services/
+├── utils/
+├── App.js
+└── index.js
 
-### `npm run eject`
+````
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites
+- Node.js (v16+ recommended)
+- npm or yarn
+- Backend server running (see **Backend** above)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Installation
+```bash
+# install dependencies
+npm install
+# or
+yarn
+````
 
-## Learn More
+### Run Development Server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+# start frontend (Create React App default)
+npm start
+# or
+yarn start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The frontend will open at `http://localhost:3000` by default.
+- If your backend **also** runs on port `3000`, run the frontend on a different port:
 
-### Code Splitting
+```bash
+# macOS / Linux
+PORT=3001 npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Windows (PowerShell)
+$env:PORT=3001; npm start
+```
 
-### Analyzing the Bundle Size
+Or change your backend port (e.g., to `3001`).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Development Workflow
 
-### Making a Progressive Web App
+### Branching Model
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `main` — production-ready
+- `develop` — active development
+- `feature/*` — feature branches
 
-### Advanced Configuration
+### Commit Convention
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Follow **Conventional Commits**:
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `feat:` — new feature
+- `fix:` — bug fix
+- `style:` — UI / formatting change (no logic)
+- `refactor:` — code restructuring
+- `chore:` — maintenance or setup
