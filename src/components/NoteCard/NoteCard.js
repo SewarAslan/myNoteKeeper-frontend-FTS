@@ -1,12 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "./NoteCard.module.css";
 
-export default function NoteCard({ note, onUpdateNote }) {
+export default function NoteCard({ note, onUpdateNote, onDeleteNote }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [title, setTitle] = useState(note.title);
   const [content, setContent] = useState(note.content);
   const [errors, setErrors] = useState({ title: "", content: "" });
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const handleOpenDialog = () => {
     setIsDialogOpen(true);
@@ -45,9 +46,46 @@ export default function NoteCard({ note, onUpdateNote }) {
     }
   };
 
+  const handleOpenDeleteDialog = () => {
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setIsDeleteDialogOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    onDeleteNote(note._id);
+    setIsDeleteDialogOpen(false);
+  };
+
   return (
     <>
       <div className={styles.noteCard}>
+        <button
+          className={styles.deleteBtn}
+          onClick={handleOpenDeleteDialog}
+          aria-label={`Delete note ${note.title}`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M3 6h18" />
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+            <line x1="10" x2="10" y1="11" y2="17" />
+            <line x1="14" x2="14" y1="11" y2="17" />
+          </svg>
+        </button>
+
         <h3 className={styles.title}>{note.title}</h3>
         <p className={styles.content}>{note.content}</p>
 
@@ -84,7 +122,6 @@ export default function NoteCard({ note, onUpdateNote }) {
                     <span className={styles.errorMessage}>{errors.title}</span>
                   )}
                 </div>
-
                 <div className={styles.formGroup}>
                   <label htmlFor="edit-content">Content</label>
                   <textarea
@@ -102,7 +139,6 @@ export default function NoteCard({ note, onUpdateNote }) {
                     </span>
                   )}
                 </div>
-
                 <div className={styles.dialogActions}>
                   <button type="submit" className={styles.submitBtn}>
                     Save
@@ -116,6 +152,36 @@ export default function NoteCard({ note, onUpdateNote }) {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>,
+          document.body
+        )}
+
+      {isDeleteDialogOpen &&
+        createPortal(
+          <div
+            className={styles.dialogOverlay}
+            onClick={handleCloseDeleteDialog}
+          >
+            <div className={styles.dialog} onClick={(e) => e.stopPropagation()}>
+              <h2 className={styles.dialogTitle}>Confirm Delete</h2>
+              <p className={styles.deleteMessage}>
+                Are you sure you want to delete the note "{note.title}"?
+              </p>
+              <div className={styles.dialogActions}>
+                <button
+                  className={styles.deleteConfirmBtn}
+                  onClick={handleConfirmDelete}
+                >
+                  Delete
+                </button>
+                <button
+                  className={styles.cancelBtn}
+                  onClick={handleCloseDeleteDialog}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>,
           document.body

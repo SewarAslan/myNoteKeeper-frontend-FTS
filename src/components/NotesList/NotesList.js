@@ -2,7 +2,13 @@ import React from "react";
 import NoteCard from "../NoteCard/NoteCard";
 import styles from "./NotesList.module.css";
 
-export default function NotesList({ notes, isLoading, error, onUpdateNote }) {
+export default function NotesList({
+  notes,
+  isLoading,
+  error,
+  onUpdateNote,
+  onDeleteNote,
+}) {
   if (isLoading) {
     return <div className={styles.loading}>Loading notes...</div>;
   }
@@ -16,7 +22,12 @@ export default function NotesList({ notes, isLoading, error, onUpdateNote }) {
   return (
     <div className={styles.notesList}>
       {notes.map((note) => (
-        <NoteCard key={note._id} note={note} onUpdateNote={onUpdateNote} />
+        <NoteCard
+          key={note._id}
+          note={note}
+          onUpdateNote={onUpdateNote}
+          onDeleteNote={onDeleteNote}
+        />
       ))}
     </div>
   );
