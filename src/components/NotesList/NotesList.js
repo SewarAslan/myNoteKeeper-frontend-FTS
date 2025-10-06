@@ -10,7 +10,7 @@ export default function NotesList({
   onDeleteNote,
 }) {
   if (isLoading) {
-    return <div className={styles.loading}>Loading notes...</div>;
+    return <div className={styles.loading}></div>;
   }
   if (error) {
     return <div className={styles.error}>Error: {error}</div>;
