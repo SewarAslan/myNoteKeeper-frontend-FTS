@@ -1,0 +1,8 @@
+.notesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background-color: var(--background);
+  border-radius: var(--radius-lg);
+}
