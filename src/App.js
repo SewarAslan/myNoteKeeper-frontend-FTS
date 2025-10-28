@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import NotesList from "./components/NotesList/NotesList";
@@ -40,6 +41,7 @@ function App() {
       <div className="notesContainer">
         <NotesList notes={notes} isLoading={isLoading} error={error} />
       </div>
+
     </div>
   );
 }
